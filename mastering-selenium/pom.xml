@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.masteringselenium</groupId>
+  <artifactId>mastering-selenium</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>mastering-selenium</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
+    <!-- <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> -->
+     <selenium.version>2.45.0</selenium.version>
+     <threads>1</threads>
+     <browser>chrome</browser>
+     <overwrite.binaries>false</overwrite.binaries>
+     <project.basedir>C:/TestAutomation/WebApplication/mastering-selenium</project.basedir>
+     <webdriver.chrome.driver>C:/TestAutomation/WebApplication/mastering-selenium/src/test/resources/selenium_standalone_binaries.windows.googlechrome.64bit/</webdriver.chrome.driver>
+     <webdriver.firefox.driver>C:/TestAutomation/WebApplication/mastering-selenium/src/test/resources/selenium_standalone_binaries.windows.internetexplorer.64bit/</webdriver.firefox.driver>
+     <webdriver.ie.driver>C:/TestAutomation/WebApplication/mastering-selenium/src/test/resources/selenium_standalone_binaries.windows.operachromium.64bit/</webdriver.ie.driver>
+     <webdriver.opera.driver>C:/TestAutomation/WebApplication/mastering-selenium/src/test/resources/selenium_standalone_binaries.windows.phantomjs.64bit/</webdriver.opera.driver>
+   </properties>
+
+   <dependencies>
+     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-remote-driver</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.14.3</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.12.4</version>
+        <configuration>
+          <parallel>methods</parallel>
+          <threadCount>${threads}</threadCount>
+            <systemProperties>
+                <browser>${browser}</browser>
+                <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
+                <webdriver.firefox.driver>${webdriver.firefox.driver}</webdriver.firefox.driver>
+                <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
+            </systemProperties>
+          <includes>
+            <include>**/*WD.java</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+        <plugin>
+            <groupId>com.lazerycode.selenium</groupId>
+            <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+            <version>1.0.7</version>
+            <configuration>
+                <!-- root directory that downloaded driver binaries will be stored in -->
+                <rootStandaloneServerDirectory>${project.basedir}/src/test/resources/selenium_standalone_binaries</rootStandaloneServerDirectory>
+                <!-- Where you want to store downloaded zip files -->
+                <downloadedZipFileDirectory>${project.basedir}/src/test/resources/selenium_standalone_zips</downloadedZipFileDirectory>
+                <customRepositoryMap>${project.basedir}/src/test/resources/Repository.xml</customRepositoryMap>
+                <overwriteFilesThatExist>${overwrite.binaries}</overwriteFilesThatExist>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>selenium</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+
+    </plugins>
+  </build>
+
+</project>
