@@ -8,6 +8,10 @@
   <name>web-app</name>
   <url>http://maven.apache.org</url>
 
+    <properties>
+        <selenium.version>2.53.1</selenium.version>
+    </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -35,7 +39,20 @@
       <dependency>
           <groupId>org.seleniumhq.selenium</groupId>
           <artifactId>selenium-java</artifactId>
-          <version>2.41.0</version>
+          <version>${selenium.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-api</artifactId>
+          <version>${selenium.version}</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>test</scope>
       </dependency>
   </dependencies>
+
 </project>
