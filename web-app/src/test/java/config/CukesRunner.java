@@ -16,6 +16,7 @@ import cucumber.api.junit.Cucumber;
 //        format = {"pretty", "lv.ctco.cukes.core.formatter.CukesJsonFormatter:target/cucumber.json"},
         features = {"src/test/resources/features"},
         glue = {"stepDefs"},
+        tags = {"@Test-X" , "~@ignore"},
         strict = true
 )
 

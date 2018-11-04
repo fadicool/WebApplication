@@ -36,11 +36,6 @@ public class userSearchStepDef {
     @Given("^I am on a browser$")
     public void I_am_on_a_browser() throws Throwable {
         driver.get("http://www.google.com");
-
-//        WebElement button = driver.findElement(By.name("q"));
-//        JavascriptExecutor jse = (JavascriptExecutor)driver;
-//        jse.executeScript("return document.readyState").equals("complete");
-
         driver.manage().window().maximize();
     }
 
